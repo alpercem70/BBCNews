@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -88,6 +89,19 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void replaceFragment(BaseFragment fragment, String tag, boolean addToBackStack) {
         replaceFragment(getSupportFragmentManager(), fragment, tag, getBaseFrameLayoutId(), addToBackStack);
     }
+
+    protected Fragment findFragment() {
+        return getSupportFragmentManager().findFragmentById(getBaseFrameLayoutId());
+    }
+
+    protected Fragment findFragment(int id) {
+        return getSupportFragmentManager().findFragmentById(id);
+    }
+
+    protected Fragment findFragment(String tag) {
+        return getSupportFragmentManager().findFragmentByTag(tag);
+    }
+
 
     private void addFragment(
             FragmentManager fragmentManager,
