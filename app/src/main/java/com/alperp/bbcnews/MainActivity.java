@@ -1,13 +1,12 @@
 package com.alperp.bbcnews;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import com.alperp.bbcnews.core.BaseActivity;
+import com.alperp.bbcnews.core.BaseFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    protected BaseFragment getContainedFragment() {
+        return null;
     }
 }
