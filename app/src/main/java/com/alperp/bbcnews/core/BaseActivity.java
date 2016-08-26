@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.alperp.bbcnews.R;
 
 import butterknife.ButterKnife;
+import icepick.Icepick;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
@@ -27,7 +28,14 @@ public abstract class BaseActivity extends AppCompatActivity {
             addFragment(fragment, tag, false);
         }
 
+        Icepick.restoreInstanceState(this, savedInstanceState);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 
     /**

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import icepick.Icepick;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -18,6 +19,8 @@ public abstract class BaseFragment extends Fragment {
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
+        Icepick.restoreInstanceState(this, savedInstanceState);
+
         final View rootView = inflater.inflate(getResourceLayoutId(), container, false);
 
         ButterKnife.bind(this, rootView);
@@ -25,6 +28,12 @@ public abstract class BaseFragment extends Fragment {
         initUserInterface(inflater, rootView);
 
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        Icepick.saveInstanceState(this, outState);
     }
 
     /**

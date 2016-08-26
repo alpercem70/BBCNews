@@ -28,4 +28,8 @@ dependencies {
     //Butterknife
     compile 'com.jakewharton:butterknife:8.3.0'
     apt 'com.jakewharton:butterknife-compiler:8.3.0'
+
+    //Icepick
+    compile 'frankiesardo:icepick:3.2.0'
+    apt 'frankiesardo:icepick-processor:3.2.0'
 }
