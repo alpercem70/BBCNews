@@ -10,11 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.alperp.bbcnews.R;
 
+import butterknife.ButterKnife;
+
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setContentView(getContentResourceId());
 
         final BaseFragment fragment = getContainedFragment();
 
@@ -23,7 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             addFragment(fragment, tag, false);
         }
 
-        setContentView(getContentResourceId());
+        ButterKnife.bind(this);
     }
 
     /**

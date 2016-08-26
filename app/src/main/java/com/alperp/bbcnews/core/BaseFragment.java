@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+
 public abstract class BaseFragment extends Fragment {
 
     @Nullable
@@ -17,6 +19,8 @@ public abstract class BaseFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         final View rootView = inflater.inflate(getResourceLayoutId(), container, false);
+
+        ButterKnife.bind(this, rootView);
 
         initUserInterface(inflater, rootView);
 
