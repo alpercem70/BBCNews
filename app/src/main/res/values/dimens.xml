@@ -9,4 +9,7 @@
     <dimen name="card_view_corner_radius">8dp</dimen>
     <dimen name="card_view_card_elevation">8dp</dimen>
     <dimen name="card_view_content_padding">8dp</dimen>
+
+    <dimen name="channel_item_thumbnail_size">75dp</dimen>
+    <dimen name="channel_item_thumbnail_margin_bottom">8dp</dimen>
 </resources>

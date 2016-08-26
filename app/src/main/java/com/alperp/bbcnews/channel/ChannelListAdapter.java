@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.alperp.bbcnews.R;
 import com.alperp.bbcnews.network.model.Item;
 import com.alperp.bbcnews.view.BBCTextView;
+import com.alperp.bbcnews.view.ItemThumbnailView;
 
 import java.util.ArrayList;
 
@@ -53,6 +54,9 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.
         @BindView(R.id.item_channel_item_textview_description)
         BBCTextView textViewDescription;
 
+        @BindView(R.id.item_channel_item_draweeview_thumbnail)
+        ItemThumbnailView draweeViewThumbnail;
+
         private Item item;
 
         public ViewHolder(View itemView) {
@@ -64,6 +68,7 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.
             this.item = item;
             textViewHeader.setText(item.getTitle());
             textViewDescription.setText(item.getDescription());
+            draweeViewThumbnail.setImageURI(item.getThumbnail().getUrl());
         }
     }
 }

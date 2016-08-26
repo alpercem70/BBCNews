@@ -46,4 +46,7 @@ dependencies {
         exclude group: 'stax', module: 'stax'
         exclude group: 'xpp3', module: 'xpp3'
     }
+
+    //Fresco
+    compile 'com.facebook.fresco:fresco:0.13.0'
 }
