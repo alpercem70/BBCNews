@@ -21,6 +21,12 @@ public class Channel implements Parcelable {
     @Element(name = "link")
     private String link;
 
+    @Element(name = "lastBuildDate")
+    private String lastBuildDate;
+
+    @Element(name = "image")
+    private Image image;
+
     @Element(name = "generator")
     private String generator;
 
@@ -33,8 +39,11 @@ public class Channel implements Parcelable {
     @Element(name = "ttl")
     private int ttl;
 
-    @ElementList
+    @ElementList(inline = true)
     private ArrayList<Item> items;
+
+    public Channel() {
+    }
 
     @Override
     public int describeContents() {
@@ -46,6 +55,8 @@ public class Channel implements Parcelable {
         dest.writeString(this.title);
         dest.writeString(this.description);
         dest.writeString(this.link);
+        dest.writeString(this.lastBuildDate);
+        dest.writeParcelable(this.image, flags);
         dest.writeString(this.generator);
         dest.writeString(this.copyright);
         dest.writeString(this.language);
@@ -57,6 +68,8 @@ public class Channel implements Parcelable {
         this.title = in.readString();
         this.description = in.readString();
         this.link = in.readString();
+        this.lastBuildDate = in.readString();
+        this.image = in.readParcelable(Image.class.getClassLoader());
         this.generator = in.readString();
         this.copyright = in.readString();
         this.language = in.readString();
@@ -76,12 +89,24 @@ public class Channel implements Parcelable {
         }
     };
 
+    public String getLastBuildDate() {
+        return lastBuildDate;
+    }
+
     public String getCopyright() {
         return copyright;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public String getGenerator() {
         return generator;
+    }
+
+    public Image getImage() {
+        return image;
     }
 
     public ArrayList<Item> getItems() {
@@ -103,9 +128,4 @@ public class Channel implements Parcelable {
     public int getTtl() {
         return ttl;
     }
-
-    public String getDescription() {
-        return description;
-    }
-
 }

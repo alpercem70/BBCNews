@@ -30,6 +30,9 @@ public class Thumbnail implements Parcelable {
         dest.writeString(this.url);
     }
 
+    public Thumbnail() {
+    }
+
     protected Thumbnail(Parcel in) {
         this.width = in.readLong();
         this.height = in.readLong();

@@ -21,8 +21,14 @@ public class Item implements Parcelable {
     @Element(name = "pubDate")
     private String pubDate;
 
-    @Element(name = "media:thumbnail")
+    @Element(name = "guid")
+    private Guid guid;
+
+    @Element(name = "thumbnail")
     private Thumbnail thumbnail;
+
+    public Item() {
+    }
 
     @Override
     public int describeContents() {
@@ -35,6 +41,7 @@ public class Item implements Parcelable {
         dest.writeString(this.description);
         dest.writeString(this.link);
         dest.writeString(this.pubDate);
+        dest.writeParcelable(this.guid, flags);
         dest.writeParcelable(this.thumbnail, flags);
     }
 
@@ -43,6 +50,7 @@ public class Item implements Parcelable {
         this.description = in.readString();
         this.link = in.readString();
         this.pubDate = in.readString();
+        this.guid = in.readParcelable(Guid.class.getClassLoader());
         this.thumbnail = in.readParcelable(Thumbnail.class.getClassLoader());
     }
 
@@ -57,6 +65,10 @@ public class Item implements Parcelable {
             return new Item[size];
         }
     };
+
+    public Guid getGuid() {
+        return guid;
+    }
 
     public Thumbnail getThumbnail() {
         return thumbnail;
