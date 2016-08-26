@@ -8,4 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TextView" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/bbc_text_standard</item>
+    </style>
+
+    <style name="TextView.Header">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/bbc_text_large</item>
+    </style>
+
+    <style name="TextView.Description">
+        <item name="android:maxLines">@integer/description_max_lines</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
 </resources>
