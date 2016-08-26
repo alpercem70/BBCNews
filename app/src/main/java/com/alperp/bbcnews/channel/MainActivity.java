@@ -8,6 +8,7 @@ import android.widget.Toast;
 import com.alperp.bbcnews.R;
 import com.alperp.bbcnews.core.BaseActivity;
 import com.alperp.bbcnews.core.BaseFragment;
+import com.alperp.bbcnews.detail.DetailsActivity;
 import com.alperp.bbcnews.network.BBCServiceProvider;
 import com.alperp.bbcnews.network.model.Item;
 import com.alperp.bbcnews.network.model.Rss;
@@ -37,6 +38,11 @@ public class MainActivity extends BaseActivity implements MainFragment.Listener 
     @Override
     public void onRefreshData() {
         getRssFeeds();
+    }
+
+    @Override
+    public void onItemClick(Item item) {
+        startActivity(DetailsActivity.newIntent(this, item));
     }
 
     private void getRssFeeds() {

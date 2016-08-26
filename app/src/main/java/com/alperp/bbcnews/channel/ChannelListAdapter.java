@@ -14,20 +14,28 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.ViewHolder> {
 
     private ArrayList<Item> items;
+    private ItemClickListener listener;
 
-    public ChannelListAdapter(ArrayList<Item> items) {
-        this.items = items;
+    public interface ItemClickListener {
+        void onItemClick(Item item);
     }
+
+    public ChannelListAdapter(ArrayList<Item> items, ItemClickListener listener) {
+        this.items = items;
+        this.listener = listener;
+    }
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         final View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.item_channel_item, parent, false);
-        return new ViewHolder(view);
+        return new ViewHolder(view, listener);
     }
 
     @Override
@@ -58,10 +66,12 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.
         ItemThumbnailView draweeViewThumbnail;
 
         private Item item;
+        private ItemClickListener listener;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, ItemClickListener itemClickListener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            this.listener = itemClickListener;
         }
 
         public void bindItem(Item item) {
@@ -69,6 +79,11 @@ public class ChannelListAdapter extends RecyclerView.Adapter<ChannelListAdapter.
             textViewHeader.setText(item.getTitle());
             textViewDescription.setText(item.getDescription());
             draweeViewThumbnail.setImageURI(item.getThumbnail().getUrl());
+        }
+
+        @OnClick(R.id.item_channel_item_cardview_container)
+        public void onItemClick() {
+            listener.onItemClick(item);
         }
     }
 }

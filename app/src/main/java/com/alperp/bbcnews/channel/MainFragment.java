@@ -21,10 +21,13 @@ import java.util.ArrayList;
 import butterknife.BindView;
 
 @FragmentWithArgs
-public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class MainFragment extends BaseFragment implements
+        SwipeRefreshLayout.OnRefreshListener,
+        ChannelListAdapter.ItemClickListener {
 
     public interface Listener {
         void onRefreshData();
+        void onItemClick(Item item);
     }
 
     @Arg
@@ -42,7 +45,7 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     protected void initUserInterface(LayoutInflater inflater, View rootView) {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        final ChannelListAdapter adapter = new ChannelListAdapter(items);
+        final ChannelListAdapter adapter = new ChannelListAdapter(items, this);
         recyclerView.setAdapter(adapter);
 
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -76,11 +79,17 @@ public class MainFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         listener.onRefreshData();
     }
 
+    @Override
+    public void onItemClick(Item item) {
+        listener.onItemClick(item);
+    }
+
+
     public void refreshData(ArrayList<Item> items) {
         this.items = items;
 
         if (recyclerView.getAdapter() == null) {
-            recyclerView.setAdapter(new ChannelListAdapter(items));
+            recyclerView.setAdapter(new ChannelListAdapter(items, this));
         } else {
             ((ChannelListAdapter) recyclerView.getAdapter()).refreshItems(items);
         }

@@ -2,7 +2,9 @@ package com.alperp.bbcnews.detail;
 
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.alperp.bbcnews.R;
 import com.alperp.bbcnews.core.BaseFragment;
@@ -22,7 +24,9 @@ public class DetailsFragment extends BaseFragment {
 
     @Override
     protected void initUserInterface(LayoutInflater inflater, View rootView) {
-
+        webView.setWebViewClient(new WebViewClient());
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.loadUrl(link);
     }
 
     @Override
