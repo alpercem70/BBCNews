@@ -7,8 +7,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
+import android.view.MenuItem;
 
 import com.alperp.bbcnews.R;
 
@@ -30,6 +33,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             addFragment(fragment, tag, false);
         }
 
+        setupActionBar();
+
         Icepick.restoreInstanceState(this, savedInstanceState);
         ButterKnife.bind(this);
     }
@@ -38,6 +43,39 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         Icepick.saveInstanceState(this, outState);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+
+            if (getParent() != null) {
+                NavUtils.navigateUpFromSameTask(this);
+            } else {
+                finish();
+            }
+
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Override to customize the action bar title.
+     * @return action bar title
+     */
+    protected String getActionBarTitle() {
+        return "";
+    }
+
+    /**
+     * Return if action bar has a back button, default is false.
+     * Override to have a action bar with back button.
+     *
+     * @return true if activity has a back button, false o/w
+     */
+    protected boolean displayHomeAsUpEnabled() {
+        return false;
     }
 
     /**
@@ -103,10 +141,15 @@ public abstract class BaseActivity extends AppCompatActivity {
         return getSupportFragmentManager().findFragmentByTag(tag);
     }
 
-    protected void setToolbarTitle(String title) {
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(title);
+    private void setupActionBar() {
+        final ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled());
+
+            final String toolbarTitle = getActionBarTitle();
+            if (!TextUtils.isEmpty(toolbarTitle)) {
+                actionBar.setTitle(toolbarTitle);
+            }
         }
     }
 

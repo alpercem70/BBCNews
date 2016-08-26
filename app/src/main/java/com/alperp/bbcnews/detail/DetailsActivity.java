@@ -23,12 +23,20 @@ public class DetailsActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         this.item = getIntent().getParcelableExtra(KEY_ITEM);
         super.onCreate(savedInstanceState);
-
-        setToolbarTitle(item.getTitle());
     }
 
     @Override
     protected BaseFragment getContainedFragment() {
         return new DetailsFragmentBuilder(item.getLink()).build();
+    }
+
+    @Override
+    protected String getActionBarTitle() {
+        return item.getTitle();
+    }
+
+    @Override
+    protected boolean displayHomeAsUpEnabled() {
+        return true;
     }
 }
