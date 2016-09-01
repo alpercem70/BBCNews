@@ -114,7 +114,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     protected void addFragment(BaseFragment fragment, String tag, boolean addToBackStack) {
-        addFragment(getSupportFragmentManager(), fragment, tag, getBaseFrameLayoutId(), true);
+        addFragment(getSupportFragmentManager(), fragment, tag, getBaseFrameLayoutId(), addToBackStack);
     }
 
     protected void replaceFragment(BaseFragment fragment) {
